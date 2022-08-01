@@ -1,0 +1,36 @@
+
+    <nav class="navbar navbar-expand-lg rounded-3" style="background-color: #07AEEE;">
+        <div class="container">
+            <a class="navbar-brand" href="#">OnlyFlans</a>
+
+
+    <label class="switch">
+    <input type="checkbox" onclick="cambiar()" id="myCheck" class="checkbox">
+    <span class="slider round"></span>
+    </label>
+
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup"
+                aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse flex-row-reverse" id="navbarNavAltMarkup">
+                <div class="navbar-nav float-right">
+                    <a class="nav-link active" href="{% url 'indice' %}">Inicio</a>
+                    <a class="nav-link active " href="{% url 'acerca' %}">Acerca</a>
+                    <a class="nav-link active" href="{% url 'bienvenido' %}">Bienvenido</a>
+                    <a class="nav-link active" href="{% url 'contacto' %}">Contacto</a>
+                    {% if not user.is_authenticated %}
+                        <a class="nav-link btn btn-secondary text-white active" href="{% url 'login' %}">Iniciar Sesión</a>
+                    {% endif %}
+                    {% if user.is_authenticated %}
+                        <a class="nav-link btn btn-secondary text-white active" href="{% url 'logout' %}">Cerrar Sesión</a>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+    </nav>
+    {% load static %}
+
+
+
+<!-- <span class="sr-only">(current)</span> -->

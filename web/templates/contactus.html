@@ -1,0 +1,61 @@
+{% extends 'base.html' %}
+{% block 'content' %}
+<div class="container">
+  <div class="col-12 col-md offset-0 offset-md-3 mt-4 mb-4"></div>
+  <h3 class="text-center">Contacto</h3>
+
+
+<div>
+  <form action="/contacto" method="post">
+    {% csrf_token %}
+    {{ form.non_field_errors }}
+
+    <div class="mb-3 text-center">
+        {% if not user.is_authenticated %}
+                            <div class="fieldWrapper">
+                                {{ form.costumer_name.errors }}
+                                <label for="{{ form.costumer_name.id_for_label }}">Nombre:</label> <br>
+                                {{ form.costumer_name }}
+                            </div>
+                            <br>
+                                  <div class="fieldWrapper">
+                                {{ form.costumer_email.errors }}
+                                <label for="{{ form.costumer_email.id_for_label }}">E-mail:</label> <br>
+                                {{ form.costumer_email }}
+                            </div>
+                    {% endif %}
+                    {% if user.is_authenticated %}
+                            <div class="fieldWrapper">
+
+                                <label for="{{ form.costumer_name.id_for_label }}" >Nombre: {{ user.first_name }} {{ user.last_name }}</label>
+
+                                <input id="{{ form.costumer_name.id_for_label }}" type="hidden" name="costumer_name" value="{{ user.first_name }} {{ user.last_name }}" ></p>
+
+                            </div>
+                            <br>
+                                  <div class="fieldWrapper">
+                                <label for="{{ form.costumer_email.id_for_label }}">E-mail: {{ user.email }} </label>
+                                <input id="{{ form.costumer_email.id_for_label }}" type="hidden" name="costumer_email" value="{{ user.email }}" ></p>
+
+                            </div>
+
+                    {% endif %}
+
+
+<br>
+<div class="fieldWrapper">
+    {{ form.message.errors }}
+    <label for="{{ form.message.id_for_label }}">Mensaje:</label> <br>
+    {{ form.message }}
+</div>
+</div>
+
+      <center><input type="submit" value="Enviar" class="mb-3" value="OK"></center>
+    </div>
+  </form>
+
+ </div>
+<br>
+</div>
+
+{% endblock %}

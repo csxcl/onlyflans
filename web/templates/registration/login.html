@@ -1,0 +1,57 @@
+<html>
+<header>
+</header>
+<body>
+{% extends 'base.html' %}
+
+
+{% block 'content' %}
+<div class="container">
+    <div class="col-12  mt-4 mb-4">
+        <h3 class="text-center"?>
+            Iniciar sesión
+        </h3>
+
+        <div>
+            <form method="post" action="{% url 'login' %}" >
+                {% csrf_token %}
+
+                {% if form.errors %}
+                    <p> USUARIO O CONTRASEÑA NO COINIDEN. INTENTA NUEVAMENTE</p>
+                {% endif %}
+
+                {% if next %}
+                    {% if user.is_authenticated %}
+                        <p> TU CUENTA NO TIENE ACCESSO A ESTA PÁGINA</p>
+                    {% else %}
+                        <p class="text-center">Loguea para ver esta pág</p>
+                    {% endif %}
+                {% endif %}
+                <div class="mb-3 text-center">
+                    <label for="{{ form.username.id_for_label }}" class="form-label">
+                        {{form.username.label_tag }}
+                    </label>
+                    <div>
+                        {{ form.username }}
+                    </div>
+
+<br>
+                    <label for="{{ form.password.id_for_label }}" class="form-label">
+                        {{form.password.label_tag }}
+                    </label>
+                    <div>
+                        {{ form.password }}
+                    </div>
+
+                    <div class="text-center mt-2"><input type="submit" value="Iniciar Sesión"></div>
+                </div>
+
+
+            </form>
+    </div>
+    </div>
+</div>
+{% endblock %}
+
+</body>
+</html>

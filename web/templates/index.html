@@ -1,0 +1,47 @@
+<html> 
+<header>
+</header>
+<body>
+
+{% extends 'base.html' %}
+{% load static %}
+{% block 'content' %}
+
+<div class="container">
+
+
+     <div class="row">
+            <div class="col">
+                <div class="h-100 p-4 text-white bg-dark rounded-3 text-center">
+                    <h2>Nuestros productos</h2>
+                    <a href="{% url 'contacto' %}" class="btn btn-outline-light">Contacto</a>
+                </div>
+            </div>
+     </div>
+
+<h2 class="text-center my-5 ">Los Flanes</h2> <p>Prueba nuestros flanes</p>
+        <div class="row"  id="contador">
+    {% for flan in flanes_publicos %}
+            <div class="col-6 col-md-3" >
+                <div class="card mx-auto mb-4 mt-2" id="tarjeta" style="object-fit: cover; min-height: 20vw;">
+                    <img src="{{ flan.image_url }}" class="card-img-top" style="width: 100%; height: 12vw; object-fit: cover;" alt="..." >
+                    <div class="card-body" >
+                        <h5 class="card-title grueso mx-2">
+                            {% if flan.favorite == True %}
+                                <img src="{% static 'star.png' %}" alt="logo" class="img-fluid mt-2" >
+                            {% endif %} {{ flan.name }}</h5>
+                        <p class="card-text mx-2 pb-4">{{ flan.description }}</p>
+                    </div>
+                </div>
+            </div>
+    {% endfor %}
+        </div>
+</div>
+
+
+
+
+{% endblock %}
+
+</body>
+</html>

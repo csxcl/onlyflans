@@ -1,0 +1,54 @@
+{% extends 'base.html' %}
+{% block 'content' %}
+<div class="container text-center" xmlns="http://www.w3.org/1999/html">
+    </br>
+    <h5> Gracias por contactarte con OnlyFlans, </br> te responderemos en breve </h5>
+    <h4 id="count-down-timer"></h4>
+    <a href="{% url 'indice' %}" class="btn btn-primary"> Volver al inicio</a>
+    </br>
+</div>
+</br>
+
+
+<script>
+
+function paddedFormat(num) {
+    return num < 10 ? "0" + num : num;
+}
+
+function startCountDown(duration, element) {
+
+    let secondsRemaining = duration;
+
+    let sec = 0;
+
+    let countInterval = setInterval(function () {
+
+
+        sec = parseInt(secondsRemaining % 60);
+
+        element.textContent = `Serás redirigido en: ${paddedFormat(sec)}`;
+
+        secondsRemaining = secondsRemaining - 1;
+        if (secondsRemaining < 0) { window.location.href = "{% url 'indice' %}"; };
+
+    }, 1000);
+}
+
+window.onload = function () {
+
+    let time_seconds = 5; // Value in seconds
+
+    let duration =  time_seconds;
+
+    element = document.querySelector('#count-down-timer');
+    element.textContent = `Serás redirigido en: ${paddedFormat(time_seconds)}`;
+
+    startCountDown(--duration, element);
+};
+
+
+
+</script>
+
+{% endblock %}
